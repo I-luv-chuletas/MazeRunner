@@ -7,3 +7,32 @@
 //
 
 #include "PositionStack.h"
+PositionStack::PositionStack(){
+    _top            = 0;
+    _amount         = 0;
+    //_positionX[0]    = 0;
+    //_positionY[0]    = 0;
+}
+
+void PositionStack::push(int position[]){
+    // Añadimos un elemento al tope de la lista.
+    _positionX.push_back(position[1]);
+    _positionY.push_back(position[0]);
+}
+
+void PositionStack::pop() {
+    // Eliminamos el ultimo elemento en la lista
+    _positionX.pop_back();
+    _positionY.pop_back();
+}
+
+int* PositionStack::getTop() {
+
+   _position[1] = _positionX.back();
+   _position[0] = _positionY.back();
+    
+    return _position;
+}
+
+int PositionStack::getAmount(){ return _positionX.size(); }
+

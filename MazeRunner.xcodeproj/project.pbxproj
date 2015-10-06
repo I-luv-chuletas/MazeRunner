@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A20414561BBB133600103161 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20414551BBB133600103161 /* main.cpp */; };
+		A204145E1BBB1B3400103161 /* PathFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A204145C1BBB1B3400103161 /* PathFinder.cpp */; };
+		A20414611BBB52E900103161 /* PositionStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A204145F1BBB52E900103161 /* PositionStack.cpp */; };
+		A20414641BBC4CFB00103161 /* GameGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20414621BBC4CFB00103161 /* GameGrid.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,14 @@
 /* Begin PBXFileReference section */
 		A20414521BBB133600103161 /* MazeRunner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MazeRunner; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20414551BBB133600103161 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A204145C1BBB1B3400103161 /* PathFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PathFinder.cpp; sourceTree = "<group>"; };
+		A204145D1BBB1B3400103161 /* PathFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathFinder.h; sourceTree = "<group>"; };
+		A204145F1BBB52E900103161 /* PositionStack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PositionStack.cpp; sourceTree = "<group>"; };
+		A20414601BBB52E900103161 /* PositionStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionStack.h; sourceTree = "<group>"; };
+		A20414621BBC4CFB00103161 /* GameGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameGrid.cpp; sourceTree = "<group>"; };
+		A20414631BBC4CFB00103161 /* GameGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameGrid.h; sourceTree = "<group>"; };
+		A20414651BBCBC5E00103161 /* SimpleMazeLayout.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = SimpleMazeLayout.rtf; sourceTree = "<group>"; };
+		A20414661BBCBDDF00103161 /* mazelayout.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mazelayout.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +68,14 @@
 		A20414541BBB133600103161 /* MazeRunner */ = {
 			isa = PBXGroup;
 			children = (
+				A20414661BBCBDDF00103161 /* mazelayout.txt */,
+				A20414651BBCBC5E00103161 /* SimpleMazeLayout.rtf */,
+				A204145C1BBB1B3400103161 /* PathFinder.cpp */,
+				A204145D1BBB1B3400103161 /* PathFinder.h */,
+				A204145F1BBB52E900103161 /* PositionStack.cpp */,
+				A20414601BBB52E900103161 /* PositionStack.h */,
+				A20414621BBC4CFB00103161 /* GameGrid.cpp */,
+				A20414631BBC4CFB00103161 /* GameGrid.h */,
 				A20414551BBB133600103161 /* main.cpp */,
 			);
 			path = MazeRunner;
@@ -118,7 +137,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A204145E1BBB1B3400103161 /* PathFinder.cpp in Sources */,
+				A20414641BBC4CFB00103161 /* GameGrid.cpp in Sources */,
 				A20414561BBB133600103161 /* main.cpp in Sources */,
+				A20414611BBB52E900103161 /* PositionStack.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

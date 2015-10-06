@@ -10,5 +10,26 @@
 #define __MazeRunner__PositionStack__
 
 #include <stdio.h>
+#include <vector>
+
+class PositionStack {
+
+private:
+    std::vector<int> _positionX;
+    std::vector<int> _positionY;
+    
+    int _position[2] = {0, 0};
+    int _top;
+    int _amount;
+    
+public:
+    PositionStack();
+    int* getTop();
+    int getAmount();
+    
+    void push(int position[]);
+    void pop();
+    
+};
 
 #endif /* defined(__MazeRunner__PositionStack__) */
