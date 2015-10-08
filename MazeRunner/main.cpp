@@ -39,9 +39,13 @@ int main(int argc, const char * argv[]) {
         char *direc = maze->getAdjacentTiles(mazeRunner->getPosition());
         
         std::cout << "Izq " << direc[0] << " Derecha " << direc[1] << " up " << direc[2] << " down " << direc[3] << std::endl;
-        std::cin >> temp;
+        
         
         mazeRunner->checkMovement(direc[0], direc[1], direc[2], direc[3]);
+        maze->markGridPosition(mazeRunner->getPosition(), mazeRunner->getSymbol());
+        maze->outputGrid();
+        
+
         std::cin >> temp;
         
         

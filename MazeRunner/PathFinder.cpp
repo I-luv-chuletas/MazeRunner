@@ -27,13 +27,25 @@ PathFinder::PathFinder(){
 
 void PathFinder::checkMovement(char left, char right, char up, char down){
     // Este metodo verifica la direccion que sea posible moverse
+    
     int direction[2]; // Aqui guardamos los valores de movimiento que vamos a tener
     //int* point;
     
-    std::cout << "Arriba hay "<< up;
+    checkXAxis(left, right, direction); // Verificamos que direccion se debe coger
+    std::cout<< "\nDirection y1: " << direction[1] << std::endl;
+
+    if (direction[0] != 0) {
+        std::cout<< "\nDirection y: " << direction[1] << std::endl;
+        direction[1] = 0;
+        makeMovement(direction);
+        direction[0] = 0;
+    }
     
-    checkXAxis(left, right, direction);
+    
+    
     checkYAxis(up, down, direction);
+    
+    std::cout << "\nLas direcciones son: " << direction[1] << " , " << direction[0] << std::endl;
     
     
     if (direction[0] == 0 && direction[1] == 0) { // Si no hay movimiento en ninguno de los dos.
@@ -55,9 +67,9 @@ void PathFinder::checkXAxis(char left, char right, int direction[]){
     std::cout<< "Verificando X.\n A la izquierda hay: " << left << "\nA la derecha hay: " << right;
     // Nuestro _movementDirection es nuestra direccion hacia la meta. Por ende esa direccion es la que tiene presedencia
     if (_movementDirection[0] == 1) {
-        if (right == '1' || right == 'n') { // Si a la derecha hay una pared o ya se recorrio
+        if (right == '1' || right == _nonViableSymbol || right == _movementSymbol) { // Si a la derecha hay una pared o ya se recorrio
             
-            if (left == '1' || left == 'n') { // Si a la izquierda hay una pared o ya se recorrio
+            if (left == '1' || left == _nonViableSymbol || left == _movementSymbol) { // Si a la izquierda hay una pared o ya se recorrio
                 direction[0] = 0; // Entonces no hay movimiento en x
                 
             }else {
@@ -66,13 +78,15 @@ void PathFinder::checkXAxis(char left, char right, int direction[]){
             
         }else {
             direction[0] = 1; // Si puedes moverte a la derecha, esa es tu nueva direccion.
+            std::cout<< "\nYou're taking a right turn, NIGGGUH\n" << std::endl;
         }
     }
     
     else if (_movementDirection[0] == -1) {
-        if (left == '1' || left == 'n') {
+         std::cout<< "\n naaaaah  other way nigguuuuuh\n";
+        if (left == '1' || left == 'n') { // Miramos a nuestra izquierda, si no podemos coger para alla:
             
-            if (right == '1' || right == 'n') {
+            if (right == '1' || right == _nonViableSymbol || right == _movementSymbol) { // Si tampoco me puedo mover a la derecha:
                 direction[0] = 0;
 
             }else {
@@ -89,15 +103,15 @@ void PathFinder::checkXAxis(char left, char right, int direction[]){
 
 void PathFinder::checkYAxis(char up, char down, int direction[]){
     
-    std::cout << "Verificando Y\n";
     std::cout << "Up: " << up << "Down: " << down << std::endl;
+    std::cout << "Mi posicion actual: " << "(" << _currentPosition[1] << " , " << _currentPosition[0] << std::endl;
     
     
     // Nuestro _movementDirection es nuestra direccion hacia la meta. Por ende esa direccion es la que tiene presedencia
     if (_movementDirection[1] == 1) {
-        if (down == '1' || down == 'n') { // Si a la derecha hay una pared o ya se recorrio
+        if (down == '1' || down == _nonViableSymbol || down == _movementSymbol) { // Si a la derecha hay una pared o ya se recorrio
             
-            if (up == '1' || up == 'n') { // Si a la izquierda hay una pared o ya se recorrio
+            if (up == '1' || up == _nonViableSymbol || up == _movementSymbol) { // Si a la izquierda hay una pared o ya se recorrio
                 direction[1] = 0; // Entonces no hay movimiento en x
                 
             }else {
@@ -110,9 +124,9 @@ void PathFinder::checkYAxis(char up, char down, int direction[]){
     }
     
     else if (_movementDirection[1] == -1) { // El inverso de todo lo que hice arriba
-        if (up == '1' || up == 'n') {
+        if (up == '1' || up == _nonViableSymbol || up == _movementSymbol ) {
             
-            if (down == '1' || down == 'n') {
+            if (down == '1' || down == _nonViableSymbol || down == _movementSymbol) {
                 direction[1] = 0;
                 
             }else {
@@ -124,10 +138,14 @@ void PathFinder::checkYAxis(char up, char down, int direction[]){
         }
     }
     
+    std::cout << "La direccion es: " << direction[1] << " ,  " << direction[0];
+    
 }
 
 
 void PathFinder::makeMovement(int direction[]) {
+    
+    //std::cout<< "\nDirection y: " << direction[1] << std::endl;
     
     _currentPosition[0] += direction[0]; // Aplica movimiento en X
     _currentPosition[1] += direction[1]; // Aplica movimiento en Y
@@ -137,8 +155,13 @@ void PathFinder::makeMovement(int direction[]) {
     
     // Actualiza el current pos
     int* pos = _positionStack->getTop();
+    
     _currentPosition[0] = pos[0];
     _currentPosition[1] = pos[1];
+    
+    
+    // Debugging: Verificando donde envia el movimiento.
+    std::cout << "Posicion en filas:" << pos[1] << "Posicion en columnas: " << pos[0] << std::endl;
     
     // Reseteamos la direccion de movimiento
     _movementDirection[0] = _defaultMovement[0];
@@ -174,7 +197,7 @@ void PathFinder::adjustDefaultMovement(int startPosition[], int finalPosition[])
     int* temp; // Variable temporera para recibir la posicion del stack
     
     std::cout<< "Estamos en: " << startPosition[0] << " , " << startPosition[1] << std::endl;
-    std::cout<< "vaamos pa: " << finalPosition[0] << " , " << finalPosition[1] << std::endl;
+    std::cout<< "vaamos pa: "  << finalPosition[0] << " , " << finalPosition[1] << std::endl;
     
     // Ponemos en el stack de posiciones la primera posicion, la cual es la inicial.
     _positionStack->push(startPosition);

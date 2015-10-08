@@ -25,11 +25,7 @@ GameGrid::GameGrid(){
     _nonViableSymbol   = '%';
     _walls             = '1';
     
-    // Abrimos el file donde se encuentra el maze layout a ser usado
-    //std::fstream mazeFile;
-    
     findKeyPositions();
-    
 }
 
 
@@ -45,7 +41,6 @@ void GameGrid::findKeyPositions() {
                 _startPosition[1] = j;
                 
                 //cout<<start_coords.at(0)<<" "<<start_coords.at(1)<<endl;
-                
             }
             
             if(_labyrinth[i][j] == '*') // Buscamos la posicion del goal
@@ -61,9 +56,9 @@ void GameGrid::findKeyPositions() {
 }
 
 
-void GameGrid::markGridPosition(int position[], char* symbol) {
+void GameGrid::markGridPosition(int position[], char *symbol) {
     // Marca la posicion recibida en el grid con el simbolo del objeto
-    _labyrinth[position[0]][position[1]] = *symbol; // <-- Funciona para todo tipo de objeto :)
+    _labyrinth[position[1]][position[0]] = *symbol; // <-- Funciona para todo tipo de objeto :)
 }
 
 void GameGrid::outputGrid(){
@@ -91,7 +86,7 @@ void GameGrid::outputGrid(){
 
 // GETTERS ////////////////////////////////////////
 int* GameGrid::getStart(){ return _startPosition; }
-int* GameGrid::getGoal() { return _goalPosition; }
+int* GameGrid::getGoal() { return _goalPosition;  }
 
 
 char* GameGrid::getAdjacentTiles(int position[]){
@@ -99,14 +94,9 @@ char* GameGrid::getAdjacentTiles(int position[]){
     //int y = position[1] - 1;
     
     
-    std::cout << "Estoy en: (" << position[1] << " , "<<position[1] << ")" << std::endl;
-    std::cout << _labyrinth[position[1]][position[0]] << std::endl;
+    std::cout << "Estoy verificando alrededor de: (" << position[1] << " , "<<position[0] << ")" << std::endl;
     
-    
-    std::cout << "A la down: " << _labyrinth[position[0]+1][position[1]] << std::endl;
-    std::cout << "A la up  : " << _labyrinth[position[1] - 1][position[1]] << std::endl;
-    
-    
+    // Colocamos lo que este adyacente de nuestra posicion en un array de caracteres para ser devuelto
     _array[0] = _labyrinth[position[1]][position[0] - 1]; // Miramos la izquierda
     _array[1] = _labyrinth[position[1]][position[0] + 1]; // Miramos la derecha
     _array[2] = _labyrinth[position[1] - 1][position[0]]; // Miramos hacia arriba

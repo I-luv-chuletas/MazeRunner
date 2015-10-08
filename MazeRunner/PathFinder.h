@@ -44,6 +44,9 @@ public:
     
     bool reachEnd(int endPosition[]);
     int* getPosition();
+    char* getSymbol(){
+        return &_characterSymbol;
+    }
 };
 
 
