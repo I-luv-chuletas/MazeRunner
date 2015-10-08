@@ -23,7 +23,7 @@ GameGrid::GameGrid(){
     _startSymbol       = 'S';
     _goalSymbol        = '^';
     _nonViableSymbol   = '%';
-    _walls             = '#';
+    _walls             = '1';
     
     // Abrimos el file donde se encuentra el maze layout a ser usado
     //std::fstream mazeFile;
@@ -68,16 +68,24 @@ void GameGrid::markGridPosition(int position[], char* symbol) {
 
 void GameGrid::outputGrid(){
     //filas
-    for (int i=0; i<10; i++)
+    int i;
+    int j;
+    //int temp;
+    
+    for (i=0; i<10; i++)
     {
         //columnas
-        for (int j=0; j<15; j++)
+        for (j=0; j<15; j++)
         {
             std::cout << _labyrinth[i][j];
+            
+
         }
         std::cout << std::endl;
+        
     }
     std::cout << std::endl;
+    
 }
 
 
@@ -88,16 +96,23 @@ int* GameGrid::getGoal() { return _goalPosition; }
 
 char* GameGrid::getAdjacentTiles(int position[]){
     
-    char* array[4]; // Aqui estaran mis 4 direcciones
+    //int y = position[1] - 1;
     
-    std::cout << "A la left: " << _labyrinth[position[1]][position[0] - 1] << std::endl;
     
-    *array[0] = _labyrinth[position[1]][position[0] - 1]; // Miramos la izquierda
-    *array[1] = _labyrinth[position[1]][position[0] + 1]; // Miramos la derecha
-    *array[2] = _labyrinth[position[1] - 1][position[0]]; // Miramos hacia arriba
-    *array[3] = _labyrinth[position[1] + 1][position[0]]; // Miramos hacia abajo
+    std::cout << "Estoy en: (" << position[1] << " , "<<position[1] << ")" << std::endl;
+    std::cout << _labyrinth[position[1]][position[0]] << std::endl;
     
-    return *array; // Devolvemos las cuatro direcciones
+    
+    std::cout << "A la down: " << _labyrinth[position[0]+1][position[1]] << std::endl;
+    std::cout << "A la up  : " << _labyrinth[position[1] - 1][position[1]] << std::endl;
+    
+    
+    _array[0] = _labyrinth[position[1]][position[0] - 1]; // Miramos la izquierda
+    _array[1] = _labyrinth[position[1]][position[0] + 1]; // Miramos la derecha
+    _array[2] = _labyrinth[position[1] - 1][position[0]]; // Miramos hacia arriba
+    _array[3] = _labyrinth[position[1] + 1][position[0]]; // Miramos hacia abajo
+    
+    return _array; // Devolvemos las cuatro direcciones
 }
 
 //    mazeFile.open(fileName);

@@ -20,6 +20,7 @@ private:
     int** _grid;
     std::string _fileName;
     
+    char _array[4]; // Aqui estaran mis 4 direcciones
     char _startSymbol;
     char _goalSymbol;
     char _nonViableSymbol;

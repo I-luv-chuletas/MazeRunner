@@ -15,6 +15,7 @@
 
 int main(int argc, const char * argv[]) {
     
+    int temp;
     // Inicializacion y Setup de variables y objetos
    
     PathFinder* mazeRunner  = new PathFinder();
@@ -22,6 +23,7 @@ int main(int argc, const char * argv[]) {
     GameGrid* maze          = new GameGrid();
     
     std::cout << "Tamo aki\n";
+    
     // Ajustamos el default movement del pathfinder
     mazeRunner->adjustDefaultMovement(maze->getStart(), maze->getGoal());
     
@@ -36,7 +38,12 @@ int main(int argc, const char * argv[]) {
         // Sacamos las direcciones
         char *direc = maze->getAdjacentTiles(mazeRunner->getPosition());
         
+        std::cout << "Izq " << direc[0] << " Derecha " << direc[1] << " up " << direc[2] << " down " << direc[3] << std::endl;
+        std::cin >> temp;
+        
         mazeRunner->checkMovement(direc[0], direc[1], direc[2], direc[3]);
+        std::cin >> temp;
+        
         
         
         

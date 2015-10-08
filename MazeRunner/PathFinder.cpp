@@ -28,8 +28,9 @@ PathFinder::PathFinder(){
 void PathFinder::checkMovement(char left, char right, char up, char down){
     // Este metodo verifica la direccion que sea posible moverse
     int direction[2]; // Aqui guardamos los valores de movimiento que vamos a tener
-    int* point;
+    //int* point;
     
+    std::cout << "Arriba hay "<< up;
     
     checkXAxis(left, right, direction);
     checkYAxis(up, down, direction);
@@ -51,6 +52,7 @@ void PathFinder::checkMovement(char left, char right, char up, char down){
 void PathFinder::checkXAxis(char left, char right, int direction[]){
     // Aqui verificamos unicamente el eje de x para saber el movimiento que va a tener
     
+    std::cout<< "Verificando X.\n A la izquierda hay: " << left << "\nA la derecha hay: " << right;
     // Nuestro _movementDirection es nuestra direccion hacia la meta. Por ende esa direccion es la que tiene presedencia
     if (_movementDirection[0] == 1) {
         if (right == '1' || right == 'n') { // Si a la derecha hay una pared o ya se recorrio
@@ -87,11 +89,15 @@ void PathFinder::checkXAxis(char left, char right, int direction[]){
 
 void PathFinder::checkYAxis(char up, char down, int direction[]){
     
+    std::cout << "Verificando Y\n";
+    std::cout << "Up: " << up << "Down: " << down << std::endl;
+    
+    
     // Nuestro _movementDirection es nuestra direccion hacia la meta. Por ende esa direccion es la que tiene presedencia
     if (_movementDirection[1] == 1) {
-        if (down == '#' || down == 'n') { // Si a la derecha hay una pared o ya se recorrio
+        if (down == '1' || down == 'n') { // Si a la derecha hay una pared o ya se recorrio
             
-            if (up == '#' || up == 'n') { // Si a la izquierda hay una pared o ya se recorrio
+            if (up == '1' || up == 'n') { // Si a la izquierda hay una pared o ya se recorrio
                 direction[1] = 0; // Entonces no hay movimiento en x
                 
             }else {
@@ -104,9 +110,9 @@ void PathFinder::checkYAxis(char up, char down, int direction[]){
     }
     
     else if (_movementDirection[1] == -1) { // El inverso de todo lo que hice arriba
-        if (up == '#' || up == 'n') {
+        if (up == '1' || up == 'n') {
             
-            if (down == '#' || down == 'n') {
+            if (down == '1' || down == 'n') {
                 direction[1] = 0;
                 
             }else {
@@ -165,11 +171,18 @@ void PathFinder::retreatPosition() {
 void PathFinder::adjustDefaultMovement(int startPosition[], int finalPosition[]) {
     // Aqui ajustamos el movimiento estandar del mazeRunner, siguiendo la salida del laberinto
     
+    int* temp; // Variable temporera para recibir la posicion del stack
+    
     std::cout<< "Estamos en: " << startPosition[0] << " , " << startPosition[1] << std::endl;
     std::cout<< "vaamos pa: " << finalPosition[0] << " , " << finalPosition[1] << std::endl;
     
     // Ponemos en el stack de posiciones la primera posicion, la cual es la inicial.
     _positionStack->push(startPosition);
+    temp = _positionStack->getTop();
+    
+    _currentPosition[0] = temp[0];
+    _currentPosition[1] = temp[1];
+    
     
     if (finalPosition[0] > startPosition[0]) { // Si la posicion del goal esta a la derecha de donde empiezo..
         
