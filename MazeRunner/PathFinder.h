@@ -31,7 +31,7 @@ private:
     
     // Metodos para verificar el moviminto por separado
     void checkXAxis(char left, char right, int direction[]);
-    void checkYAxis(char up, char down, int direction[]);
+    void checkYAxis(char up, char down, char left, char right, int direction[]);
     
 public:
     PathFinder();

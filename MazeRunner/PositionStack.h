@@ -21,6 +21,7 @@ private:
     int _position[2] = {0, 0};
     int _top;
     int _amount;
+    int _positionNode; // Donde puedes virar a mas de una direccion
     
 public:
     PositionStack();

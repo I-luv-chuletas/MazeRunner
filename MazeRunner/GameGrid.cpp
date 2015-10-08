@@ -84,15 +84,8 @@ void GameGrid::outputGrid(){
 }
 
 
-// GETTERS ////////////////////////////////////////
-int* GameGrid::getStart(){ return _startPosition; }
-int* GameGrid::getGoal() { return _goalPosition;  }
-
-
 char* GameGrid::getAdjacentTiles(int position[]){
-    
-    //int y = position[1] - 1;
-    
+    // Verifica las posiciones adyacentes a las coordenadas recibidas, y devuelve los valores dentro del grid.
     
     std::cout << "Estoy verificando alrededor de: (" << position[1] << " , "<<position[0] << ")" << std::endl;
     
@@ -104,6 +97,11 @@ char* GameGrid::getAdjacentTiles(int position[]){
     
     return _array; // Devolvemos las cuatro direcciones
 }
+
+
+// GETTERS ////////////////////////////////////////
+int* GameGrid::getStart(){ return _startPosition; }
+int* GameGrid::getGoal() { return _goalPosition;  }
 
 //    mazeFile.open(fileName);
 //    if (mazeFile.is_open()) {

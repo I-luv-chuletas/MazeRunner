@@ -28,22 +28,31 @@ PathFinder::PathFinder(){
 void PathFinder::checkMovement(char left, char right, char up, char down){
     // Este metodo verifica la direccion que sea posible moverse
     
+    
     int direction[2]; // Aqui guardamos los valores de movimiento que vamos a tener
+    direction[0] = 0;
+    direction[1] = 0;
     //int* point;
     
+    // *****Cambia el scope del array, se esta perdiendo el valor *******
     checkXAxis(left, right, direction); // Verificamos que direccion se debe coger
-    std::cout<< "\nDirection y1: " << direction[1] << std::endl;
+    std::cout<< "\nDirection : " << direction[1] << std::endl;
 
     if (direction[0] != 0) {
-        std::cout<< "\nDirection y: " << direction[1] << std::endl;
-        direction[1] = 0;
+        std::cout<< "\nDirection x: " << direction[0] << std::endl;
         makeMovement(direction);
         direction[0] = 0;
     }
     
+    std::cout << "\n----------------------------------------------------------------------";
+    std::cout << "\n CHECK MOVEMENT\n";
+    std::cout << "\nEstando en: " << _currentPosition[1] << " , " << _currentPosition[0];
+    std::cout << "\nA mis alrededores estan:\n";
+    std::cout << "Up: " << up << "\nDown " << down << "\nLeft: " << left << "\nRight: "<< right <<"\n\n";
+    std::cout << "----------------------------------------------------------------------\n";
     
     
-    checkYAxis(up, down, direction);
+    checkYAxis(up, down, left, right, direction);
     
     std::cout << "\nLas direcciones son: " << direction[1] << " , " << direction[0] << std::endl;
     
@@ -57,6 +66,8 @@ void PathFinder::checkMovement(char left, char right, char up, char down){
         makeMovement(direction);
         
     }
+    
+    std::cout<<"Soy Chucky "<<direction[1]<<" "<<direction[0]<<std::endl;
     
 }
 
@@ -101,11 +112,17 @@ void PathFinder::checkXAxis(char left, char right, int direction[]){
 }
 
 
-void PathFinder::checkYAxis(char up, char down, int direction[]){
+void PathFinder::checkYAxis(char up, char down, char left, char right, int direction[]){
     
-    std::cout << "Up: " << up << "Down: " << down << std::endl;
-    std::cout << "Mi posicion actual: " << "(" << _currentPosition[1] << " , " << _currentPosition[0] << std::endl;
+    std::cout << "Up: " << up << "\nDown: " << down << std::endl;
+    std::cout << "Mi POSITion actual: " << "(" << _currentPosition[1] << " , " << _currentPosition[0] << std::endl;
+    std::cout << "direccion: "<<direction[1]<<" "<<direction[0]<<std::endl;
     
+    std::cout << "\n----------------------------------------------------------------------";
+    std::cout << "\nEstando en: " << _currentPosition[1] << " , " << _currentPosition[0];
+    std::cout << "\nA mis alrededores estan:\n";
+    std::cout << "Up: " << up << "\nDown " << down << "\nLeft: " << left << "\nRight: "<< right <<"\n\n";
+    std::cout << "----------------------------------------------------------------------\n";
     
     // Nuestro _movementDirection es nuestra direccion hacia la meta. Por ende esa direccion es la que tiene presedencia
     if (_movementDirection[1] == 1) {
@@ -119,7 +136,9 @@ void PathFinder::checkYAxis(char up, char down, int direction[]){
             }
             
         }else {
+            std::cout << std::endl << "Lo tienes invertido guevon: " << up << std::endl;
             direction[1] = 1; // Si puedes moverte a la derecha, esa es tu nueva direccion.
+            std::cout << std::endl << "#OMG like, te estas moviendo parriba, oseaaa" << std::endl;
         }
     }
     
@@ -150,24 +169,24 @@ void PathFinder::makeMovement(int direction[]) {
     _currentPosition[0] += direction[0]; // Aplica movimiento en X
     _currentPosition[1] += direction[1]; // Aplica movimiento en Y
     
+    std::cout << "\n\nMi posicion actualizada: (" << _currentPosition[1] << " , " << _currentPosition[0] << ")\n" << std::endl;
+    
     // Actualiza el stack de posiciones
     _positionStack->push(_currentPosition);
     
     // Actualiza el current pos
-    int* pos = _positionStack->getTop();
-    
-    _currentPosition[0] = pos[0];
-    _currentPosition[1] = pos[1];
+//    int* pos = _positionStack->getTop();
+//    
+//    _currentPosition[0] = pos[0];
+//    _currentPosition[1] = pos[1];
     
     
     // Debugging: Verificando donde envia el movimiento.
-    std::cout << "Posicion en filas:" << pos[1] << "Posicion en columnas: " << pos[0] << std::endl;
+    std::cout << "Posicion en filas:" << _currentPosition[1] << "Posicion en columnas: " << _currentPosition[0] << std::endl;
     
     // Reseteamos la direccion de movimiento
-    _movementDirection[0] = _defaultMovement[0];
-    _movementDirection[1] = _defaultMovement[1];
     
-    
+
 }
 
 

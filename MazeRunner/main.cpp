@@ -36,12 +36,25 @@ int main(int argc, const char * argv[]) {
     while (!mazeRunner->reachEnd(maze->getGoal())){
         
         // Sacamos las direcciones
-        char *direc = maze->getAdjacentTiles(mazeRunner->getPosition());
+        char *direc = maze->getAdjacentTiles(mazeRunner->getPosition()); // Aqui hay un array local
         
         std::cout << "Izq " << direc[0] << " Derecha " << direc[1] << " up " << direc[2] << " down " << direc[3] << std::endl;
         
+        // Printing de Debugging (para ver que el detecta en la posicion (3,2))
+//        int tempArray[] = { 2, 3};
+//        char* prueba = maze->getAdjacentTiles(tempArray);
+//        std::cout << "Izq " << prueba[0] << " Derecha " << prueba[1] << " up " << prueba[2] << " down " << prueba[3] << std::endl;
+//
+        
         
         mazeRunner->checkMovement(direc[0], direc[1], direc[2], direc[3]);
+        // ENCONTRADO EL PROBLEMA: NO ESTA ACTUALIZANDO EL ADJACENT TILES CUANDO SE MUEVE INTERNAMENTE EN EL CHECK MOVEMENT
+        // SOLUCION: SEPARA CHECK MOVEMENTS Y PONLO EN EL MAIN LOOP.
+        // check X axis
+        // make movement
+        // check Y axis
+        // make movement
+        
         maze->markGridPosition(mazeRunner->getPosition(), mazeRunner->getSymbol());
         maze->outputGrid();
         
