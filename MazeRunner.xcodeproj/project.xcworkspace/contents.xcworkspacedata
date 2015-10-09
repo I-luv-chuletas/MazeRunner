@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:mazelayout.txt">
-   </FileRef>
-   <FileRef
-      location = "group:../MazeRunner/SimpleMazeLayout.rtf">
-   </FileRef>
-   <FileRef
       location = "self:MazeRunner.xcodeproj">
    </FileRef>
 </Workspace>
