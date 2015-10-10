@@ -136,7 +136,6 @@ void PathFinder::checkYAxis(char up, char down){
             }
             
         }else {
-            std::cout << std::endl << "Lo tienes invertido guevon: " << up << std::endl;
             _movementDirection[1] = 1; // Si puedes moverte a la derecha, esa es tu nueva direccion.
             std::cout << std::endl << "#OMG like, te estas moviendo parriba, oseaaa" << std::endl;
         }

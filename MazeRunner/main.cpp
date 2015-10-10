@@ -56,7 +56,6 @@ int main(int argc, const char * argv[]) {
         mazeRunner->checkXAxis(direc[0], direc[1]);
         
         
-        
         if (mazeRunner->getMovementDirectionX() != 0) { // Si en el eje de x hay movimiento
             mazeRunner->makeMovement(); // Haz el movimiento
         }
@@ -76,16 +75,6 @@ int main(int argc, const char * argv[]) {
             mazeRunner->retreatPosition();
         }
         
-        // check X axis
-        // if direction[x] != 0
-            // make movement
-        // check Y axis
-        // if direction[y] != 0
-            // make movement
-        //if direction[x] and direction[y] == 0
-            // retreat algorithm
-        // Reseteamos el movementDirection a 0 para el proximo loop run:)
-        // Algorithm complete <3
         
         maze->markGridPosition(mazeRunner->getPosition(), mazeRunner->getSymbol());
         maze->outputGrid();
