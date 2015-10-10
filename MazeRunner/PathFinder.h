@@ -28,6 +28,10 @@ private:
     char _characterSymbol;      // Simbolo que representa nuestro personaje.
     bool _reachEnd;             // Flag que nos deja saber si llegamos al final o no
     
+    // Flags para saber si hubo o no movimiento
+    bool _movementInX = false;
+    bool _movementInY = false;
+    
     // Aqui en adelante estarian los dos stacks.
     PositionStack* _positionStack   = new PositionStack();
     PositionStack* _nonViableStack  = new PositionStack();
@@ -52,6 +56,9 @@ public:
     char* getSymbol(){ return &_characterSymbol; }
     int getMovementDirectionY(){ return _movementDirection[1]; }
     int getMovementDirectionX(){ return _movementDirection[0]; }
+    bool getMovementFlagX(){ return _movementInX; }
+    bool getMovementFlagY(){ return _movementInY; }
+    
 };
 
 

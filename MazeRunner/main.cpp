@@ -48,30 +48,21 @@ int main(int argc, const char * argv[]) {
             direc[2] == up
             direc[3] == down */
         
-        
-        
-       // mazeRunner->checkMovement(direc[0], direc[1], direc[2], direc[3]); // Innecesario ahora que encontramos el problema.
-        // ENCONTRADO EL PROBLEMA: NO ESTA ACTUALIZANDO EL ADJACENT TILES CUANDO SE MUEVE INTERNAMENTE EN EL CHECK MOVEMENT
-        // SOLUCION: SEPARA CHECK MOVEMENTS Y PONLO EN EL MAIN LOOP.
         mazeRunner->checkXAxis(direc[0], direc[1]);
         
-        
-        if (mazeRunner->getMovementDirectionX() != 0) { // Si en el eje de x hay movimiento
-            mazeRunner->makeMovement(); // Haz el movimiento
-        }
-        
         // Despues de hacer el movimiento, aplicamos el movimiento en el Grid. Sacamos nuevamente los espacios adyacentes.
-        maze->getAdjacentTiles(mazeRunner->getPosition());
+        direc = maze->getAdjacentTiles(mazeRunner->getPosition()); // Redundante que vuelva a recibir los valores de las direcciones?
+        
         
         // Verificamos el eje de Y
         mazeRunner->checkYAxis(direc[2], direc[3]);
     
-        if (mazeRunner->getMovementDirectionY() != 0) { // Si en el eje de x hay movimiento
-            mazeRunner->makeMovement(); // Haz el movimiento
-        }
+        // Volvemos y ajustamos el maze
+        
         
         // Verificamos si hay que retroceder
-        if (mazeRunner->getMovementDirectionX() == 0 && mazeRunner->getMovementDirectionY() == 0 ) { // Si ambos movimientos son nulos
+        if (!mazeRunner->getMovementFlagX() && !mazeRunner->getMovementFlagY()) { // Si ambos movimientos son nulos
+            std::cout << "\nRetrocediendo\n";
             mazeRunner->retreatPosition();
         }
         
