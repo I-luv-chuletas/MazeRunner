@@ -18,7 +18,7 @@ PathFinder::PathFinder(){
     // Inicializamos nuestros campos
     _movesCounter       = 0;
     _characterSymbol    = '@';
-    _movementSymbol     = '*';
+    _movementSymbol     = '@';
     _nonViableSymbol    = 'n';
     _reachEnd           = false;
     
@@ -79,8 +79,8 @@ void PathFinder::checkXAxis(char left, char right){
 void PathFinder::checkYAxis(char up, char down){
     
     std::cout << "Up: " << up << "\nDown: " << down << std::endl;
-    std::cout << "Mi POSITion actual: " << "(" << _currentPosition[1] << " , " << _currentPosition[0] << std::endl;
-    std::cout << "direccion: " << _movementDirection[1] << " " << _movementDirection[0] << std::endl;
+    std::cout << "Mi POSITion actual: " << "(" << _currentPosition[1] << " , " << _currentPosition[0] << ")"<< std::endl;
+
     
     // Nuestro _movementDirection es nuestra direccion hacia la meta. Por ende esa direccion es la que tiene presedencia
     if (_defaultMovementDirection[1] == 1) {
@@ -94,13 +94,14 @@ void PathFinder::checkYAxis(char up, char down){
                 //_movementDirection[1] = -1;
                 _currentPosition[1] -= 1; // Si puedes moverte a la izquierda, esa es tu nueva direccion.
                 _movementInY = true;
+                std::cout<< std::endl << "Te estas moviendo parriba doood" << std::endl;
             }
             
         }else {
            // _movementDirection[1] = 1;
             _currentPosition[1] += 1; // Si puedes moverte a la derecha, esa es tu nueva direccion.
             _movementInY = true;
-            std::cout << std::endl << "#OMG like, te estas moviendo parriba, oseaaa" << std::endl;
+            std::cout << std::endl << "#OMG like, te estas moviendo para abajo, oseaaa" << std::endl;
         }
     }
     
@@ -125,26 +126,6 @@ void PathFinder::checkYAxis(char up, char down){
         }
     }
     
-}
-
-
-void PathFinder::makeMovement() {
-    
-    //std::cout<< "\nDirection y: " << direction[1] << std::endl;
-    _currentPosition[0] += _movementDirection[0]; // Aplica movimiento en X
-    _currentPosition[1] += _movementDirection[1]; // Aplica movimiento en Y
-    
-    std::cout << "\n\nMi posicion actualizada: (" << _currentPosition[1] << " , " << _currentPosition[0] << ")\n" << std::endl;
-    
-    // Actualiza el stack de posiciones
-    _positionStack->push(_currentPosition);
-    
-    // Debugging: Verificando donde envia el movimiento.
-    std::cout << "Posicion en filas:" << _currentPosition[1] << "Posicion en columnas: " << _currentPosition[0] << std::endl;
-    
-    // Reseteamos la direccion de movimiento
-//    _movementDirection[0] = 0;
-//    _movementDirection[1] = 0;
 }
 
 

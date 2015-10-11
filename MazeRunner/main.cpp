@@ -38,7 +38,7 @@ int main(int argc, const char * argv[]) {
         //Las direcciones con las que se suma la posicion del maze runner, asi obtenemos su nueva posicion.
         
         // Sacamos las direcciones
-        char *direc = maze->getAdjacentTiles(mazeRunner->getPosition()); // Aqui hay un array local
+        char *direc = maze->getAdjacentTiles(mazeRunner->getPosition()); // Se devuelven lo que este en el grid en 4 posiciones
         
         std::cout << "Izq " << direc[0] << " Derecha " << direc[1] << " up " << direc[2] << " down " << direc[3] << std::endl;
         
@@ -49,6 +49,8 @@ int main(int argc, const char * argv[]) {
             direc[3] == down */
         
         mazeRunner->checkXAxis(direc[0], direc[1]);
+
+        maze->markGridPosition(mazeRunner->getPosition(), mazeRunner->getSymbol());
         
         // Despues de hacer el movimiento, aplicamos el movimiento en el Grid. Sacamos nuevamente los espacios adyacentes.
         direc = maze->getAdjacentTiles(mazeRunner->getPosition()); // Redundante que vuelva a recibir los valores de las direcciones?
