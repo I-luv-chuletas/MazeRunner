@@ -48,7 +48,14 @@ int main(int argc, const char * argv[]) {
             direc[2] == up
             direc[3] == down */
         
+        // Verificamos movimiento en el eje de X
         mazeRunner->checkXAxis(direc[0], direc[1]);
+        
+        // Verificamos si hubo movimiento, para aplicar la nueva posicion al stack
+        if (mazeRunner->getMovementFlagX()) {
+            std::cout<< "\nMoviendo X\n";
+            mazeRunner->updatePositionStack(); // Si se movio en X, aplica el movimiento al stack
+        }
 
         maze->markGridPosition(mazeRunner->getPosition(), mazeRunner->getSymbol());
         
@@ -58,27 +65,30 @@ int main(int argc, const char * argv[]) {
         
         // Verificamos el eje de Y
         mazeRunner->checkYAxis(direc[2], direc[3]);
+        
+        // Verificamos el flag para aplicar movimiento al stack
+        if (mazeRunner->getMovementFlagY()) {
+            std::cout<< "\nMoviendo Y\n";
+            mazeRunner->updatePositionStack(); // Si se movio en Y, aplica el movimiento al stack
+        }
     
         // Volvemos y ajustamos el maze
         
         
         // Verificamos si hay que retroceder
-        if (!mazeRunner->getMovementFlagX() && !mazeRunner->getMovementFlagY()) { // Si ambos movimientos son nulos
-            std::cout << "\nRetrocediendo\n";
+        if (!mazeRunner->getMovementFlagX() && !mazeRunner->getMovementFlagY()) { // Si no hubo movimiento en ninguno de los ejes
+            
+            maze->markGridPosition(mazeRunner->getPosition(), mazeRunner->_nonViableSymbol);
             mazeRunner->retreatPosition();
-        }
-        
+            
+        }else
+            //mazeRunner->updatePositionStack();
         
         maze->markGridPosition(mazeRunner->getPosition(), mazeRunner->getSymbol());
         maze->outputGrid();
         
-
+        // Debugging purposes
         std::cin >> temp;
-        
-        
-        
-        
-        
         
     }
     

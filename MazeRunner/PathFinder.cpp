@@ -129,6 +129,14 @@ void PathFinder::checkYAxis(char up, char down){
 }
 
 
+void PathFinder::updatePositionStack(){
+    // se le hace update al stack de posiciones cada vez que se hace movimiento completo
+    std::cout << "\n!!!AÑADIMOS AL STACK!!!: \n( " <<  _currentPosition[0] << " , "<< _currentPosition[1] << ")\n" <<std::endl;
+    _positionStack->push(_currentPosition);
+    
+}
+
+
 void PathFinder::retreatPosition() {
     
     int* point;
@@ -136,12 +144,18 @@ void PathFinder::retreatPosition() {
     // pinta tu posicion como no viable
     // Añade la posicion al stack de posiciones no viables
     _nonViableStack->push(_currentPosition);
+    point = _nonViableStack->getTop();
+    //point = _positionStack->getTop();
+    
+    std::cout << "La posicion de la cual procedo es: \n( " <<  point[0] << " , "<< point[1] << ")\n" <<std::endl;
     
     // Hazle pop a la posicion actual
     _positionStack->pop();
     
     // Tu nueva posicion sera la proxima posicion con prioridad en el stack (que tenga otro camino para recorrer)
     point = _positionStack->getTop();
+    
+    std::cout<< "Vuelvo al punto: \n(" << point[0]<< " , " << point[1] << ")\n" << std::endl;
     
     _currentPosition[0] = point[0];
     _currentPosition[1] = point[1];

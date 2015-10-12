@@ -56,9 +56,9 @@ void GameGrid::findKeyPositions() {
 }
 
 
-void GameGrid::markGridPosition(int position[], char *symbol) {
+void GameGrid::markGridPosition(int position[], char symbol) {
     // Marca la posicion recibida en el grid con el simbolo del objeto
-    _labyrinth[position[1]][position[0]] = *symbol; // <-- Funciona para todo tipo de objeto :)
+    _labyrinth[position[1]][position[0]] = symbol; // <-- Funciona para todo tipo de objeto :)
 }
 
 void GameGrid::outputGrid(){

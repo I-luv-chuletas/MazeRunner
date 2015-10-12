@@ -40,7 +40,7 @@ private:
 public:
     GameGrid();
     void findKeyPositions();
-    void markGridPosition(int position[], char* symbol);
+    void markGridPosition(int position[], char symbol);
     void createGrid();
     void outputGrid();
     

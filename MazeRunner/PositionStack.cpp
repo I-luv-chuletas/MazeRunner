@@ -16,8 +16,8 @@ PositionStack::PositionStack(){
 
 void PositionStack::push(int position[]){
     // Añadimos un elemento al tope de la lista.
-    _positionX.push_back(position[1]);
-    _positionY.push_back(position[0]);
+    _positionX.push_back(position[0]);
+    _positionY.push_back(position[1]);
 }
 
 void PositionStack::pop() {
@@ -28,8 +28,8 @@ void PositionStack::pop() {
 
 int* PositionStack::getTop() {
 
-   _position[1] = _positionX.back();
-   _position[0] = _positionY.back();
+   _position[0] = _positionX.back();
+   _position[1] = _positionY.back();
     
     return _position;
 }

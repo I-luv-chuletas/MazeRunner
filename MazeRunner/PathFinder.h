@@ -24,7 +24,7 @@ private:
     
     int _movesCounter;          // Contador para saber cuantos pasos ha tomado el runner.
     char _movementSymbol;       // Simbolo que marca por donde el runner ha pasado.
-    char _nonViableSymbol;      // Simbolo para marcar los caminos no viables.
+    //char _nonViableSymbol;      // Simbolo para marcar los caminos no viables.
     char _characterSymbol;      // Simbolo que representa nuestro personaje.
     bool _reachEnd;             // Flag que nos deja saber si llegamos al final o no
     
@@ -38,11 +38,10 @@ private:
     
 public:
     PathFinder();
-    void checkMovement(char left, char right, char up, char down);
     
     void adjustDefaultMovement(int startPosition[], int finalPosition[]);
     void retreatPosition(); // Coger una pasada posicion del stack.
-    void makeMovement();
+    void updatePositionStack();
     
     
     bool reachEnd(int endPosition[]);
@@ -53,12 +52,14 @@ public:
     void checkYAxis(char up, char down);
 
     // Getters /////////////////////////////////////////////////////////////////;
-    char* getSymbol(){ return &_characterSymbol; }
+    char getSymbol(){ return _characterSymbol; }
     int getMovementDirectionY(){ return _movementDirection[1]; }
     int getMovementDirectionX(){ return _movementDirection[0]; }
     bool getMovementFlagX(){ return _movementInX; }
     bool getMovementFlagY(){ return _movementInY; }
     
+    
+    char _nonViableSymbol = 'n';      // Simbolo para marcar los caminos no viables.
 };
 
 
